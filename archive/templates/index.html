@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+	<script>
+		var host = "www.0000000000.org";
+		if ((host == window.location.host) && (window.location.protocol != "https:")){
+			window.location.protocol = "https";
+		}
+	</script>
+	<link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
+    <style type="text/css">
+
+		body{
+			font-family: 'Roboto Mono', monospace;
+		    height: 100%;
+		}
+
+		h1 {
+		    font-size: 1.2em;
+		}
+
+		h2 {
+		    font-size: 0.8em;
+		}
+
+		.pull-right{text-align: center;}
+		.pull-left{float: left;}
+		.clear-fix{clear:both;}
+		div.logo{text-align: center;
+		         margin: 20px 20px 20px 20px;
+		         fill: #566375;
+		         font-size: 26px;
+		         color: black !important;
+		         font-weight: bold;
+		         font-family: 'Roboto Mono', monospace;
+		         padding: 10px;
+		         color: white;
+		         /* border-radius: 28px; */
+		        }
+
+		div.logo svg{
+		    width:180px;
+		    height:100px;
+		}
+
+		.logo-active{fill: #44aacc !important;}
+		#formWrapper{
+		    width:100%;
+		    height:100%;
+		    position: absolute;
+		    top:0;
+		    left:0;
+		    transition:all .3s ease;}
+		.darken-bg{background: rgba(0,0,0,.5) !important; transition:all .3s ease;}
+
+		div#form{
+			font-family: 'Roboto Mono', monospace;
+		    position: absolute;
+		    width:80%
+		    height:80%
+		    height:auto;
+		    background-color: #fff;
+		    margin:auto;
+		    border-radius: 5px;
+		    padding:20px;
+		    left:50%;
+		    top:36%;
+		    margin-left:-180px;
+		    margin-top:-200px;
+		}
+
+		div.form-item{
+		    position: relative; display: block; margin-bottom: 20px;
+		    font-family: 'Roboto Mono', monospace;
+		}		
+
+		div.form-item a {
+		}
+
+		div.form-item .form-style:focus{
+		    outline: none; border:1px solid black; color:black; 
+		}
+		div.form-item p.formLabel {
+		    position: absolute;
+		    left:26px;
+		    top:6px;
+		    transition:all .4s ease;
+		    color:#bbb;
+		    font-family: 'Roboto Mono', monospace;
+		}
+
+		.formTop{top:-22px !important; left:26px; background-color: #fff; padding:0 5px; font-size: 14px; color:black !important;}
+		.formStatus{color:#8a8a8a !important;}
+
+		a {
+			text-decoration: none;
+		    font-family: 'Roboto Mono', monospace;
+		    font-size: 1em;
+		    padding: 3px 0 0 0;
+		}
+
+		div.form-item a.login {
+		    width: 300px;
+		    height: 60px;
+		    -moz-border-radius: 19px;
+		    -webkit-border-radius: 19px;
+		    border-radius: 19px;
+		    -moz-background-clip: padding;
+		    -webkit-background-clip: padding-box;
+		    background-clip: padding-box;
+		    background-color: #2a3fea;
+		    border:1px solid #55b1df;
+		    border:none;
+		    color: #fff;
+		    font-family: 'Roboto Mono', monospace;
+		    font-size: 105%;
+		    text-align: center;
+		    vertical-align: center;
+		    letter-spacing: .8px;
+		    transition: all .2s ease;
+		    padding: 5px 5%;
+		    border:1px solid #ccc;
+		}
+
+		div.form-item a.login:hover{background-color: #fff; border:1px solid #55b1df; color:#55b1df; cursor:pointer;}
+		div.form-item a.login:focus{outline: none;}
+
+		.sm  { font-size: 20px; }
+		.btn { text-align: center; }
+
+		#create {
+		    font-size: 15px;
+		    width: 245px;
+		}
+
+		.toplogo {
+		    text-align: center;
+		}
+
+		.toplogo img {
+		    width: 67px;
+		}
+
+		@media screen and (max-width: 420px) {
+		    div#form{
+			top: 50%;
+		    }
+		}
+
+		@media screen and (max-width: 728px) {
+		    div#form{
+			top: 50%;
+		    }
+		}
+
+		@media screen and (max-width: 768px) {
+		    div#form{
+			top: 50%;
+		    }
+		}
+
+		@media only screen and (max-width: 736px) and (min-width: 414px) {
+		    div#form{
+			top: 50%;
+		    }
+		}
+
+		@media only screen and (max-width: 732px) and (min-width: 412px) {
+		    div#form{
+			top: 50%;
+		    }
+		}
+
+		@media only screen and (max-width: 568px) and (min-width: 320px) {
+		    div#form{
+			top: 50%;
+		    }
+		}
+
+		@media only screen and (max-width: 667px) and (min-width: 375px) {
+		    div#form{
+			top: 50%;
+		    }
+		}
+
+		@media only screen and (max-width: 732px) and (min-width: 412px) {
+		    div#form{
+			top: 50%;
+		    }
+		}
+    </style>
+  </head>
+
+  <body>
+	<div id="formWrapper">
+	  <div id="form">
+	    <div class="logo">
+	      <h1 style="font-family: 'Roboto Mono', monospace;">posthuman archive</h1>
+	    </div>
+	    <div class="form-item btn">
+	      <a id='download' class="login">download</a>
+	    </div>
+	    <div id="upload2">
+	        <div class="form-item">
+		        <form id="upload_form" method="post" enctype="multipart/form-data" action="{% url 'upload' %}" target="_blank">
+		          {% csrf_token %}
+				  <input type="file" name="newUpload" class="login pull-right"><br>
+				  <p style="font-family: 'Roboto Mono', monospace;">
+				  	passphrase: <input type="password" name="pass" size='16' class="form-style" autocomplete="off">
+				  </p><br>
+				  <div class="form-item btn">
+				  	<a class="login" id=submit_upload>upload</a>
+				  </div>
+				</form>
+		    </div>
+		</div>
+		<div id="upload1">
+		    <div class="form-item btn">
+		      <a id='upload' class="login">upload</a>
+		    </div>
+		</div>
+	  </div>
+	</div>
+  </body>
+
+<script>
+
+	window.onload = function() {
+		$("#upload2").hide();
+	}
+
+	$("#download").click(function(){
+		var win = window.open("{% url 'download' %}", '_blank');
+		win.focus()
+	})
+
+	$("#upload").click(function(){
+		$("#upload1").hide()
+		$("#upload2").show();
+	})
+
+	$('#submit_upload').click(function(){
+		document.getElementById('upload_form').submit();
+		$("#upload2").hide();
+		$("#upload1").show();
+	})
+</script>
+</html>

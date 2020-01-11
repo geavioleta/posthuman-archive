@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+  <head>
+<meta charset="UTF-8">
+    <script src="https://aristaticfiles.s3.amazonaws.com/ecies.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/sha256.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+	<script>
+		var host = "www.0000000000.org";
+		if ((host == window.location.host) && (window.location.protocol != "https:")){
+			window.location.protocol = "https";
+		}
+	</script>
+	<link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
+    <style type="text/css">
+
+		body{
+			font-family: 'Roboto Mono', monospace;
+		    height: 100%;
+		}
+
+		h1 {
+		    font-size: 1.2em;
+		}
+
+		h2 {
+		    font-size: 0.8em;
+		}
+
+		.pull-right{text-align: center;}
+		.pull-left{float: left;}
+		.clear-fix{clear:both;}
+		div.logo{text-align: center;
+		         margin: 20px 20px 20px 20px;
+		         font-size: 26px;
+		         color: black !important;
+		         font-weight: bold;
+		         font-family: 'Roboto Mono', monospace;
+		         padding: 10px;
+		         color: white;
+		}
+
+		#formWrapper{
+		    width:100%;
+		    height:100%;
+		    position: absolute;
+		    top:0;
+		    left:0;}
+		.darken-bg{background: rgba(0,0,0,.5) !important; transition:all .3s ease;}
+
+		div#form{
+			font-family: 'Roboto Mono', monospace;
+			position: relative;
+		    vertical-align: center;
+		    width:100%;
+		    height:auto;
+		    background-color: #fff;
+		}
+
+		div.form-item{
+		    position: relative; display: block; margin-bottom: 20px;
+		    font-family: 'Roboto Mono', monospace;
+		}
+		div.text-item{
+		    position: relative; display: block;
+		    font-family: 'Roboto Mono', monospace;
+		    text-align: center;
+		    vertical-align: center;
+		}
+		.right-text {
+			padding-left:5px;
+		}
+
+		div.form-item a {
+		}
+
+		a {
+			text-decoration: none;
+		    font-family: 'Roboto Mono', monospace;
+		    font-size: 1em;
+		    padding: 3px 0 0 0;
+		}
+
+		a.link {
+			text-decoration: underline;
+			color: blue;
+			cursor: pointer;
+		}
+
+		div.form-item a.login {
+		    width: 300px;
+		    height: 60px;
+		    border-radius: 10px;
+		    background-color: black;
+		    border:1px solid black;
+		    border:none;
+		    color: white;
+		    font-family: 'Roboto Mono', monospace;
+		    font-size: 105%;
+		    text-align: center;
+		    vertical-align: center;
+		    letter-spacing: .5px;
+		    padding: 5px 5%;
+		}
+		.entry{
+			color: black !important;
+		}
+		div.form-item a.enc-button {
+		    width: 300px;
+		    height: 60px;
+		    -moz-border-radius: 10px;
+		    -webkit-border-radius: 10px;
+		    border-radius: 10px;
+		    -moz-background-clip: padding;
+		    -webkit-background-clip: padding-box;
+		    background-clip: padding-box;
+		    background-color: black;
+		    border:1px solid black;
+		    color: white;
+		    font-family: 'Roboto Mono', monospace;
+		    font-size: 105%;
+		    text-align: center;
+		    vertical-align: center;
+		    letter-spacing: .5px;
+		    padding: 5px 5%;
+		    border:1px solid black;
+		    outline: none;
+		}
+
+		div.form-item a.login:hover{background-color: #fff; border:1px solid black; color:black; cursor:pointer;}
+		div.form-item a.login:focus{outline: none;}
+		div.form-item a.enc-button:hover{color: black; cursor:pointer;}
+		div.form-item a.enc-button:focus{outline: none;}
+
+		div.form-item .form-style {
+		    width: 200px;
+		    height: 25px;
+		    -moz-border-radius: 10px;
+		    -webkit-border-radius: 10px;
+		    border-radius: 10px;
+		    background-color: white;
+		    border:1px #ccc solid;
+		    font-family: 'Roboto Mono', monospace;
+		    font-size: 1.35em;
+		    text-align: center;
+		    vertical-align: center;
+		    padding: 1px;
+		}
+		div.form-item .form-style:focus{
+		    outline: none; border:1px solid black; color:black;
+		}
+
+		.sm  { font-size: 20px; }
+		.btn { text-align: center; }
+		.ctr { text-align: center; font-size: 0.8em; }
+
+		#create {
+		    font-size: 15px;
+		    width: 245px;
+		}
+	</style>
+  </head>
+
+  <body>
+	<div id="formWrapper">
+	  <div id="form">
+	    <h1 style="font-family: 'Roboto Mono', monospace; text-align: center; font-size: 26px;">desktop-encrypt</h1>
+	    <p style="font-family: 'Roboto Mono', monospace; text-align: center;">desktop-encrypt is an easy to use encryption tool<br>drop any folder on the desktop and then lock and unlock it with simple terminal commands<br><br>
+	    desktop-encrypt is meant for absolutely anyone, not just coders or cryptographers<br>
+		if you are a beginner: this guide will get you up and running!<br>
+		    <div class="form-item btn">
+		      <a id='english' class="login">instructions (eng)</a>
+		    </div>
+		    <div class="form-item btn">
+		      <a id='spanish' class="login">instructions (esp)</a>
+		    </div>
+		</p>
+		<br>
+	    <p style="font-family: 'Roboto Mono', monospace; text-align: center;">
+	    	INSTALLATION EXAMPLE (Mac OS X):<br><br>
+		    <video width="600" controls autoplay>
+	  			<source src="https://archive-downloads.s3.amazonaws.com/InstallDesktopEncrypt.mp4" type="video/mp4">
+	  		</video>
+	  	</p>
+	    <p style="font-family: 'Roboto Mono', monospace; text-align: center;">
+	    	USAGE EXAMPLE:<br><br>
+		    <video width="600" controls autoplay>
+	  			<source src="https://archive-downloads.s3.amazonaws.com/UseDesktopEncrypt.mov" type="video/mp4">
+	  		</video>
+	  	</p>
+	  	<p style="font-family: 'Roboto Mono', monospace; text-align: center;">
+	  		FOR WINDOWS/LINUX USERS:<br>
+	  		xcode is a tool for Mac OS X only. Simply skip the xcode installation steps.<br>
+	  		this package is meant for Mac/Linux only. Windows installation may not work on all machines.
+	  	</p>
+	  	<br><br>
+	  </div>
+	</div>
+  </body>
+  <script>
+	$("#english").click(function(){
+		var win = window.open('https://archive-downloads.s3.amazonaws.com/INSTRUCTIONS_ENG.pdf', '_blank');
+		win.focus()
+	})
+	$("#spanish").click(function(){
+		var win = window.open('https://archive-downloads.s3.amazonaws.com/INSTRUCTIONS_ESP.pdf', '_blank');
+		win.focus()
+	})
+  </script>
+</html>
