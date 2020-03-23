@@ -11,15 +11,15 @@
 	<h1>Encrypt/Decrypt</h1>
 	data: <input type="text" id="data">
 	key:  <input type="text" id="key">
-	<p id="encrypt"><strong>encrypt</strong></p>
-	<p id="decrypt"><strong>decrypt</strong></p>
+	<p style="cursor:pointer" id="encrypt"><strong>encrypt</strong></p>
+	<p style="cursor:pointer" id="decrypt"><strong>decrypt</strong></p>
 	<br><br>
 	<p id="response"></p>
 	<br><br>
 	<h1>Generate Key</h1>
 	passphrase: <input type="text" id="pwd">
 	salt:  <input type="text" id="salt">
-	<p id="generate"><strong>generate</strong></p>
+	<p style="cursor:pointer" id="generate"><strong>generate</strong></p>
 	<p id="key-resp"></p>
 </body>
 <script>
@@ -31,19 +31,19 @@
 	$("#encrypt").click(function(){
 		var a = encrypt($("#key").val(), $("#data").val());
 		document.getElementById("response").innerHTML = a;
-	}
+	});
 
 	$("#decrypt").click(function(){
 		var a = decrypt($("#key").val(), $("#data").val());
 		document.getElementById("response").innerHTML = a;
-	}
+	});
 
 	$("#generate").click(function(){
 		var priv = sha256($("#pwd").val()+$("salt").val());
-		var pub = derivePubHex(priv)
-		var a = JSON.stringify({"priv": priv, "pub": pub})
-		document.getElementById("response").innerHTML = a;
-	}
+		var pub = derivePubHex(priv);
+		var a = JSON.stringify({"priv": priv, "pub": pub});
+		document.getElementById("key-resp").innerHTML = a;
+	});
 
 	function decrypt(hexKey, b64cipher) {
 		var cipher = Buf.from(b64decode(b64cipher));
