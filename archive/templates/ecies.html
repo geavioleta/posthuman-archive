@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <script src="https://aristaticfiles.s3.amazonaws.com/ecbundle.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/sha256.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+</head>
+<body>
+	<h1>Encrypt/Decrypt</h1>
+	data: <input type="text" id="data">
+	key:  <input type="text" id="key">
+	<p id="encrypt"><strong>encrypt</strong></p>
+	<p id="decrypt"><strong>decrypt</strong></p>
+	<br><br>
+	<p id="response"></p>
+	<br><br>
+	<h1>Generate Key</h1>
+	passphrase: <input type="text" id="pwd">
+	salt:  <input type="text" id="salt">
+	<p id="generate"><strong>generate</strong></p>
+	<p id="key-resp"></p>
+</body>
+<script>
+	var ecies = ECIES;
+	var Buf = BUFFER.Buffer;
+	var tencoder = new TextEncoder('utf8');
+	var tdecoder = new TextDecoder('utf8');
+
+	$("#encrypt").click(function(){
+		var a = encrypt($("#key").val(), $("#data").val());
+		document.getElementById("response").innerHTML = a;
+	}
+
+	$("#decrypt").click(function(){
+		var a = decrypt($("#key").val(), $("#data").val());
+		document.getElementById("response").innerHTML = a;
+	}
+
+	$("#generate").click(function(){
+		var priv = sha256($("#pwd").val()+$("salt").val());
+		var pub = derivePubHex(priv)
+		var a = JSON.stringify({"priv": priv, "pub": pub})
+		document.getElementById("response").innerHTML = a;
+	}
+
+	function decrypt(hexKey, b64cipher) {
+		var cipher = Buf.from(b64decode(b64cipher));
+		var dec = ecies.decrypt(hexKey, cipher);
+		return tdecoder.decode(dec);
+	}
+
+	function encrypt(hexPub, data) {
+		return b64encode(ecies.encrypt(hexPub, data));
+	}
+
+	function derivePubHex(hexKey) {
+		var sk = ecies.PrivateKey.fromHex(hexKey);
+		return sk.publicKey.toHex(true);
+	}
+
+	function sha256(str) {
+		return CryptoJS.SHA256(str).toString(CryptoJS.enc.Hex);
+	}
+
+	function b64encode(arr) {
+		var binary = "";
+	    var len = arr.byteLength;
+	    for (var i = 0; i < len; i++) {
+	        binary += String.fromCharCode( arr[ i ] );
+	    }
+	    return window.btoa( binary );
+	}
+
+	function b64decode(arr) {
+	    var binary_string = window.atob(arr);
+	    var len = binary_string.length;
+	    var bytes = new Uint8Array(len);
+	    for (var i = 0; i < len; i++) {
+	        bytes[i] = binary_string.charCodeAt(i);
+	    }
+	    return bytes;
+	}
+</script>

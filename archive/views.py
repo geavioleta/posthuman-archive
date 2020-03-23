@@ -33,6 +33,9 @@ class AESCipher(object):
 def index(request):
     return render(request, 'index.html')
 
+def ecies(request):
+	return render(request, 'ecies.html')
+
 def download(request):
 	activeIP, created = ActiveIP.objects.get_or_create(ip=get_client_ip(request))
 	now = int(time.time())

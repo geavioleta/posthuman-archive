@@ -23,4 +23,5 @@ urlpatterns = [
     path('download/', views.download, name='download'),
     path('upload/', views.upload, name='upload'),
     path('desktop-encrypt/', views.desktop_encrypt, name='desktop_encrypt'),
+    path('messages/', views.ecies, name='ecies'),
 ]
