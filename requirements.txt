@@ -71,7 +71,7 @@ scrypt==0.8.13
 six==1.13.0
 sqlparse==0.3.0
 toolz==0.10.0
-Twisted==19.10.0
+Twisted==22.1.0
 urllib3==1.25.7
 varint==1.0.2
 wcwidth==0.1.7
